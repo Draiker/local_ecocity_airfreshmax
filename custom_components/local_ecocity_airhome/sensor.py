@@ -6,6 +6,12 @@ Copyright (c) 2019 Mario Villavecchia
 Licensed under MIT. All rights reserved.
 
 https://github.com/lichtteil/local_luftdaten/
+
+Support for Ecocity Airhome sensors.
+
+Mykhailo G
+
+
 """
 
 import logging
@@ -33,41 +39,40 @@ _LOGGER = logging.getLogger(__name__)
 
 VOLUME_MICROGRAMS_PER_CUBIC_METER = 'µg/m3'
 
-DOMAIN = "local_luftdaten"
+DOMAIN = "local_ecocity_airhome"
 
-SENSOR_TEMPERATURE = 'temperature'
-SENSOR_HUMIDITY = 'humidity'
+
 SENSOR_BME280_TEMPERATURE = 'BME280_temperature'
 SENSOR_BME280_HUMIDITY = 'BME280_humidity'
 SENSOR_BME280_PRESSURE = 'BME280_pressure'
-SENSOR_BMP_TEMPERATURE = 'BMP_temperature'
-SENSOR_BMP_PRESSURE = 'BMP_pressure'
-SENSOR_BMP280_TEMPERATURE = 'BMP280_temperature'
-SENSOR_BMP280_PRESSURE = 'BMP280_pressure'
-SENSOR_PM1 = 'SDS_P1'
-SENSOR_PM2 = 'SDS_P2'
+
+SENSOR_PM0 = 'PMS_P0'
+SENSOR_PM1 = 'PMS_P1'
+SENSOR_PM2 = 'PMS_P2'
+
+SENSOR_CO2 = 'CO2'
+
 SENSOR_WIFI_SIGNAL = 'signal'
-SENSOR_HTU21D_TEMPERATURE = 'HTU21D_temperature'
-SENSOR_HTU21D_HUMIDITY = 'HTU21D_humidity'
+
 
 SENSOR_TYPES = {
-    SENSOR_TEMPERATURE: ['Temperature', TEMP_CELSIUS, 'temperature'],
-    SENSOR_HUMIDITY: ['Humidity', '%', 'humidity'],
+
     SENSOR_BME280_TEMPERATURE: ['Temperature', TEMP_CELSIUS, 'temperature'],
     SENSOR_BME280_HUMIDITY: ['Humidity', '%', 'humidity'],
     SENSOR_BME280_PRESSURE: ['Pressure', 'Pa', 'pressure'],
-    SENSOR_BMP_TEMPERATURE: ['Temperature', TEMP_CELSIUS, 'temperature'],
-    SENSOR_BMP_PRESSURE: ['Pressure', 'Pa', 'pressure'],
-    SENSOR_BMP280_TEMPERATURE: ['Temperature', TEMP_CELSIUS, 'temperature'],
-    SENSOR_BMP280_PRESSURE: ['Pressure', 'Pa', 'pressure'],
-    SENSOR_PM1: ['PM10', VOLUME_MICROGRAMS_PER_CUBIC_METER, None],
-    SENSOR_PM2: ['PM2.5', VOLUME_MICROGRAMS_PER_CUBIC_METER, None],
+
+    SENSOR_PM0: ['PM1', VOLUME_MICROGRAMS_PER_CUBIC_METER, None],
+    SENSOR_PM1: ['PM2.5', VOLUME_MICROGRAMS_PER_CUBIC_METER, None],
+    SENSOR_PM2: ['PM10', VOLUME_MICROGRAMS_PER_CUBIC_METER, None],
+
+    SENSOR_CO2: ['CO2', 'ppm', None],
+
     SENSOR_WIFI_SIGNAL: ['Wifi signal', 'dBm', 'signal_strength'],
-    SENSOR_HTU21D_TEMPERATURE: ['Temperature', TEMP_CELSIUS, 'temperature'],
-    SENSOR_HTU21D_HUMIDITY: ['Humidity', '%', 'humidity']
+
+
 }
 
-DEFAULT_NAME = 'Luftdaten Sensor'
+DEFAULT_NAME = 'Ecocity Airhome'
 DEFAULT_RESOURCE = 'http://{}/data.json'
 DEFAULT_VERIFY_SSL = True
 

@@ -1,0 +1,8 @@
+{
+  "domain": "local_ecocity_airhome",
+  "name": "Local Ecocity Airhome",
+  "documentation": "https://github.com/mykhailog/local_ecocity_airhome",
+  "dependencies": [],
+  "codeowners": ["@lichtteil","@mykhailog"],
+  "requirements": []
+}
