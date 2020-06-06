@@ -1,13 +1,17 @@
 
 
 
-# Eco-City AirHome Local for Home Assistant
+# Eco-City AirHome for Home Assistant
 
 ## About
-This custom component for Home Assistant integrates your (own) local [Ecocity Airhome sensor](https://beegreen.com.ua/airhome-pristrij-monitoringu-jakosti-povitrja-primishhennjah-16518) (based on Luftdaten sensor) (air quality/particle sensor) without using the cloud. 
-
+This custom component for Home Assistant integrates your own [Ecocity Airhome sensor](https://beegreen.com.ua/airhome-pristrij-monitoringu-jakosti-povitrja-primishhennjah-16518)  (air quality/particle sensor). 
+![screenshot](https://user-images.githubusercontent.com/1454659/83942505-9add1a00-a7fc-11ea-92b2-cd33e6b3909a.png)
 
 ## Installation
+### HACS
+If you use [HACS](https://hacs.xyz/) you can install and update this component.
+1. Go into HACS -> CUSTOM REPOSITORIES and add url: https://github.com/mykhailog/local_ecocity_airhome with type "integration"
+2. Go to integration, search "airhome" and click *Install*.
 
 
 ### Manual
@@ -35,10 +39,10 @@ sensor:
       - PMS_P0
       - PMS_P1
       - PMS_P2
+      - CO2
 ```
 
 Following sensor data can be read:
-
 
 - BME280_temperature
 - BME280_humidity
@@ -49,9 +53,6 @@ Following sensor data can be read:
 - PMS_P2
 
 Sensor type `signal` gives the wifi signal strength of the sensor device.
-
-Please open an issue if you want to see other attributes and provide me with a sample of your sensor data by calling `http://192.168.x.y/data.json`.
-
 
 
 
@@ -65,7 +66,7 @@ sensor:
   - platform: template
     sensors:
       temperature:
-        value_template: '{{ (states("sensor.ecocity_airhome_temperature") | float) | round(1) - 2}}'
+        value_template: '{{ (states("sensor.airhome_temperature") | float) | round(1) - 2}}'
         friendly_name: 'Temperature'
         unit_of_measurement: '°C'
 ```
