@@ -1,7 +1,7 @@
 """
 Support for Luftdaten sensors.
 
-Copyright (c) 2019 Mario Villavecchia
+Copyright (c) 2020 Mario Villavecchia
 
 Licensed under MIT. All rights reserved.
 
@@ -114,18 +114,18 @@ class AqiCalculator(Entity):
 
 
     def __init__(self, rest_client, name, sensor_type):
-        """Initialize the LuftdatenSensor sensor."""
+        """Initialize the AQI Calculator."""
         self.rest_client = rest_client
         self._name = name
         self._state = None
-        self.sensor_type = 'aqi'
+        self.sensor_type = 'AQI'
         self._unit_of_measurement = None
         self._device_class = None
 
     @property
     def name(self):
         """Return the name of the sensor."""
-        return '{} {}'.format(self._name,'aqi')
+        return '{} {}'.format(self._name,'AQI')
 
     @property
     def state(self):
