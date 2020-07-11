@@ -18,6 +18,7 @@ import logging
 import asyncio
 import aiohttp
 import async_timeout
+import aqi
 
 import json
 
@@ -106,7 +107,73 @@ async def async_setup_platform(hass, config, async_add_devices, discovery_info=N
     for variable in config[CONF_MONITORED_CONDITIONS]:
         devices.append(LuftdatenSensor(rest_client, name, variable))
 
+    devices.append(AqiCalculator(rest_client, name, variable))
     async_add_devices(devices, True)
+
+class AqiCalculator(Entity):
+
+
+    def __init__(self, rest_client, name, sensor_type):
+        """Initialize the LuftdatenSensor sensor."""
+        self.rest_client = rest_client
+        self._name = name
+        self._state = None
+        self.sensor_type = 'aqi'
+        self._unit_of_measurement = None
+        self._device_class = None
+
+    @property
+    def name(self):
+        """Return the name of the sensor."""
+        return '{} {}'.format(self._name,'aqi')
+
+    @property
+    def state(self):
+        """Return the state of the device."""
+        return self._state
+
+    @property
+    def unit_of_measurement(self):
+        """Return the unit of measurement of this entity, if any."""
+        return self._unit_of_measurement
+
+    @property
+    def device_class(self):
+        """Return the device class of this entity, if any."""
+        return self._device_class
+
+    async def async_update(self):
+        """Get the latest data from REST API and update the state."""
+        try:
+            await self.rest_client.async_update()
+        except LuftdatenError:
+            value = None
+            return
+        value = self.rest_client.data
+
+        try:
+            parsed_json = json.loads(value)
+            if not isinstance(parsed_json, dict):
+                _LOGGER.warning("JSON result was not a dictionary")
+                return
+        except ValueError:
+            _LOGGER.warning("REST result could not be parsed as JSON")
+            _LOGGER.debug("Erroneous JSON: %s", value)
+            return
+        sensordata_values = parsed_json['sensordatavalues']
+        pm25 = 0
+        pm10 = 0
+        for sensordata_value in sensordata_values:
+           if sensordata_value['value_type'] == 'PMS_P1':
+             pm25 = sensordata_value['value']
+           elif sensordata_value['value_type'] =='PMS_P2':
+             pm10 = sensordata_value['value']
+
+        self._state = aqi.to_aqi([
+            (aqi.POLLUTANT_PM25, pm25),
+            (aqi.POLLUTANT_PM10, pm10),
+        ])
+
 
 
 class LuftdatenSensor(Entity):
