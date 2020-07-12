@@ -119,7 +119,7 @@ class AqiCalculator(Entity):
         self._name = name
         self._state = None
         self.sensor_type = 'AQI'
-        self._unit_of_measurement = None
+        self._unit_of_measurement = 'AQI'
         self._device_class = None
 
     @property
@@ -169,10 +169,10 @@ class AqiCalculator(Entity):
            elif sensordata_value['value_type'] =='PMS_P2':
              pm10 = sensordata_value['value']
 
-        self._state = aqi.to_aqi([
+        self._state = int(aqi.to_aqi([
             (aqi.POLLUTANT_PM25, pm25),
             (aqi.POLLUTANT_PM10, pm10),
-        ])
+        ]))
 
 
 
