@@ -1,12 +1,9 @@
-
-
-
 # Eco-City AirHome for Home Assistant
 
 ## About
 This custom component for Home Assistant integrates your own [Ecocity Airhome sensor](https://beegreen.com.ua/airhome-pristrij-monitoringu-jakosti-povitrja-primishhennjah-16518)  (air quality/particle sensor). 
 
-![screenshot](https://user-images.githubusercontent.com/1454659/83942505-9add1a00-a7fc-11ea-92b2-cd33e6b3909a.png)
+<img src="https://user-images.githubusercontent.com/1454659/111311840-57ef8300-8667-11eb-8c9a-05034a7d9153.png" width="600">
 
 ## Installation
 ### HACS
