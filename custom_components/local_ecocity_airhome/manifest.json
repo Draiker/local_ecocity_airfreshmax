@@ -4,6 +4,6 @@
   "documentation": "https://github.com/mykhailog/local_ecocity_airhome",
   "dependencies": [],
   "codeowners": ["@lichtteil","@mykhailog"],
-  "requirements": ["python-aqi==0.6.1"].
+  "requirements": ["python-aqi==0.6.1"],
   "version": "0.1.0"
 }
