@@ -251,7 +251,7 @@ class LuftdatenClient(object):
         """Get the latest data from Luftdaten service."""
         _LOGGER.debug("Get data from %s", str(self._resource))
         try:
-            with async_timeout.timeout(30, loop=self._loop):
+            async with async_timeout.timeout(timeout):
                 response = await self._session.get(self._resource)
             self.data = await response.text()
             _LOGGER.debug("Received data: %s", str(self.data))
