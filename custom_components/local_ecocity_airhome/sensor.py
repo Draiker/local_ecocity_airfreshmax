@@ -246,13 +246,14 @@ class LuftdatenClient(object):
         self._session = session
         self._resource = resource
         self.data = None
+        self.timeout = 10
 
     async def async_update(self):
         """Get the latest data from Luftdaten service."""
         _LOGGER.debug("Get data from %s", str(self._resource))
         try:
-            async with async_timeout.timeout(timeout):
-                response = await self._session.get(self._resource)
+            async with async_timeout.timeout(timeout=self.timeout):
+            response = await self._session.get(self._resource)
             self.data = await response.text()
             _LOGGER.debug("Received data: %s", str(self.data))
         except aiohttp.ClientError as err:
