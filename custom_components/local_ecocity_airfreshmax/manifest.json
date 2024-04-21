@@ -1,0 +1,9 @@
+{
+  "domain": "local_ecocity_airfreshmax",
+  "name": "Local Ecocity Air Fresh Max",
+  "documentation": "https://github.com/Draiker/local_ecocity_airfreshmax",
+  "dependencies": [],
+  "codeowners": ["@lichtteil","@mykhailog","@Draiker"],
+  "requirements": ["python-aqi==0.6.1"],
+  "version": "0.1.0"
+}
